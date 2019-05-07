@@ -6,48 +6,87 @@
     </title>
 
     <style>
-        #canvasBox {
-            height: 100px;
-            width: 100px;
-            border: 1px solid black;
-            border-radius: 2px;
-            padding: 2px;
-        }
+      #mainBox {
+        margin: auto;
+        width: 50%;
+        overflow: hidden;
+      }
 
-        table, th, td {
-            border: 1px solid black;
-        }
+      #dataInput {
+        text-align: center;
+        margin: auto;
+        width: 60%;
+        border: 3px solid black;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: white;
+        float: left;
+      }
+
+      .canvasBox {
+          margin: auto;
+          height: 100px;
+          width: 100px;
+          border-radius: 2px;
+          padding: 2px;
+      }
+
+      #calendarSpace {
+        background-image: url("stone.jpg");
+        float: right;
+        width: 20%;
+        padding: 10px 50px 0px 50px;
+        border: 3px solid black;
+        border-radius: 5px;
+      }
+
+      table, th, td {
+          border: 1px solid black;
+      }
+
+      #calendarBox {
+        margin: auto;
+        margin-top: 10px;
+        width: 75%;
+      }
     </style>
 </head>
 
 <body>
-Calculate Day of the Year <p>
-Year: <input type="number" name="year" id="year" min="1">   BCE <input type="checkbox" id="bc"> <p>
-Month (1-12) <input type="number" name="month" id="month" min="1" max="12"> <p>
-Day (1-31) <input type="number" name="day" id="day" min="1" max="31"> <p>
-<input type="button" value="Calculate" onclick="errorCheck()"> 
-<input type="button" value="Today's Date" onclick="todaysDate()">
-<input type="button" value="Fall of Teotihuacan" onclick="cortesDay()"><br/>
-<input type="button" value="Generate Aztec Calendar" onclick="makeAztecCalendar()">
+  <div id="mainBox">
+    <div id="dataInput">
+      <p>Calculate Day of the Year </p>
+      <p>Year: <input type="number" name="year" id="year" min="1">   BCE <input type="checkbox" id="bc"> </p>
+      <p>Month (1-12) <input type="number" name="month" id="month" min="1" max="12"> </p>
+      <p>Day (1-31) <input type="number" name="day" id="day" min="1" max="31"> </p>
+      <input type="button" value="Calculate" onclick="errorCheck()">
+      <input type="button" value="Today's Date" onclick="todaysDate()">
+      <input type="button" value="Fall of Teotihuacan" onclick="cortesDay()"><br/>
+      <input type="button" value="Generate Aztec Calendar" onclick="makeAztecCalendar()">
 
-<p>
-<div id="dataSpace">
-<div id="totalDays"></div> <br/>
-<div id="longCount"></div><br/>
-<div id="tzolkin"></div><br/>
-<div id="haab"></div><br/>
-<div id="xiuhnelpilli"></div><br/>
-<div id="tonalpohualli"></div><br/>
-<div id="xiuhpohualli"></div><br/>
-</div></p>
+      <p>
+        <div id="dataSpace">
+          <div id="totalDays"></div> <br/>
+          <div id="longCount"></div><br/>
+          <div id="tzolkin"></div><br/>
+          <div id="haab"></div><br/>
+          <div id="xiuhnelpilli"></div><br/>
+          <div id="tonalpohualli"></div><br/>
+          <div id="xiuhpohualli"></div><br/>
+        </div>
+      </p>
+    </div>
 
-<div id="canvasBox"><canvas id="baktun" width="100" height="100"></canvas></div><br/>
-<div id="canvasBox"><canvas id="katun" width="100" height="100"></canvas></div><br/>
-<div id="canvasBox"><canvas id="tun" width="100" height="100"></canvas></div><br/>
-<div id="canvasBox"><canvas id="uinal" width="100" height="100"></canvas></div><br/>
-<div id="canvasBox"><canvas id="kin" width="100" height="100"></canvas></div><br/>
-
-<div id="calendarSpace"></div>
+    <div id="calendarSpace">
+      <div class="canvasBox"><canvas id="baktun" width="100" height="100"></canvas></div><br/>
+      <div class="canvasBox"><canvas id="katun" width="100" height="100"></canvas></div><br/>
+      <div class="canvasBox"><canvas id="tun" width="100" height="100"></canvas></div><br/>
+      <div class="canvasBox"><canvas id="uinal" width="100" height="100"></canvas></div><br/>
+      <div class="canvasBox"><canvas id="kin" width="100" height="100"></canvas></div><br/>
+    </div>
+  </div>
+  <div id="calendarBox">
+  </div>
 </body>
 
 <script src="long-count.js"></script>

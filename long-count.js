@@ -6,7 +6,7 @@ function todaysDate() {
     document.getElementById("day").value = d.getDate();
 }
 
-//Supplies the day Cuauhtemoc surrendered to Cortes
+//Supplies the day Cuauhtémoc surrendered to Cortes
 function cortesDay() {
     document.getElementById("year").value = 1521;
     document.getElementById("month").value = 8;
@@ -16,13 +16,14 @@ function cortesDay() {
 //Checking to make sure the user inputed a correct date value
 function errorCheck() {
     let = daysInAMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    let year = Number(document.getElementById("year").value); 
+    let year = Number(document.getElementById("year").value);
     let month = Number(document.getElementById("month").value);
     let day = Number(document.getElementById("day").value);
     let bcBox = document.getElementById("bc");
 
     console.clear();
     //Checks to see if the year is a leap year and adds a day to Feb if it is
+    //Leap years have some odd rules...
     if (((year % 4) === 0) && ((year % 100) !== 0)) {
         daysInAMonth[1] = 29;
     } else if ((year % 400) === 0) {
@@ -30,7 +31,8 @@ function errorCheck() {
     } else if (year === 1 && bcBox.checked === true) {
         daysInAMonth[1] = 29;
     }
-    
+
+    //Makes sure the inputed values are within the proper range
     if (month > 12 || month < 1) {
         document.getElementById("totalDays").innerHTML = "You have entered an invalid month.";
     } else if (day > daysInAMonth[month - 1]) {
@@ -46,12 +48,11 @@ function errorCheck() {
 function getDayOfYear(year, month, day, daysInAMonth, bcBox) {
 
     let totalDays = 0;
-    
-    //Crunches the numbers
+    //adds up the days of the year in the previous months
     for (i = 0; i < (month - 1); i++) {
         totalDays += daysInAMonth[i];
     }
-
+    //adds the days that have elapsed this month
     totalDays += day;
     console.log(totalDays);
     return daysSinceWorldBegan(year, totalDays, bcBox);
@@ -83,7 +84,7 @@ function daysSinceWorldBegan(year, totalDays, bcBox) {
                     } else {
                         longCount += 365;
                     }
-                    
+
                 }
                 longCount += totalDays + firstYear;
             }
@@ -160,11 +161,11 @@ function convertToLongCountStyle(longCount) {
     document.getElementById("tzolkin").innerHTML = "Tzolk'in (Mayan sacred calendar, 260 days): " + calculateTzolkin(longCount);
     document.getElementById("haab").innerHTML = "Haab' (Mayan solar calendar, 365 days): " + calculateHaab(longCount);
     document.getElementById("xiuhnelpilli").innerHTML = "Xiuhnelpilli (Aztec year): " + calculateXiuhnelpilli(Number(document.getElementById("year").value));
-    document.getElementById("tonalpohualli").innerHTML = "Tonalpohualli (Aztec Sacred calendar, 260 days): " + calculateTonalpohualli(longCount);
+    document.getElementById("tonalpohualli").innerHTML = "Tonalpohualli (Aztec sacred calendar, 260 days): " + calculateTonalpohualli(longCount);
     document.getElementById("xiuhpohualli").innerHTML = "Xiuhpohualli (Aztec solar calendar, 365 days): " + calculateXiuhpohualli(longCount);
-    
+
     function calculateTzolkin(longCount) {
-        let tzolkinDays = ["Imix'", "Ik'", "Ak'b'al", "K'an", "Chikchan", "Kimi", "Manik'", "Lamat", "Muluk", "Ok", 
+        let tzolkinDays = ["Imix'", "Ik'", "Ak'b'al", "K'an", "Chikchan", "Kimi", "Manik'", "Lamat", "Muluk", "Ok",
                             "Chuwen", "Eb'", "B'en", "Ix", "Men", "Kib'", "Kab'an", "Etz'nab'", "Kawak", "Ajaw"];
         let tzolkinDay = 0;
         let tzolkinCycle = 0;
@@ -183,13 +184,13 @@ function convertToLongCountStyle(longCount) {
     }
 
     function calculateHaab(longCount) {
-        let haabMonths = ["Pop", "Wo'", "Sip", "Sotz'", "Sek", "Xul", "Yaxk'in'", "Mol", "Ch'en", 
+        let haabMonths = ["Pop", "Wo'", "Sip", "Sotz'", "Sek", "Xul", "Yaxk'in'", "Mol", "Ch'en",
                         "Yax", "Sak'", "Keh", "Mak", "K'ank'in", "Muwan'", "Pax", "K'ayab", "Kumk'u", "Wayeb'"];
         let haabDay = 0;
         let haabRoughDay = 0;
 
         haabRoughDay = (longCount - 17) % 365;
-        
+
         if (haabRoughDay === 0) {
             haabMonth = 18;
         } else if (haabRoughDay >= 361) {
@@ -199,7 +200,7 @@ function convertToLongCountStyle(longCount) {
             haabDay = (haabRoughDay % 20);
             haabMonth = Math.floor(haabRoughDay / 20);
         }
-        
+
 
         let haabDayString;
         if (haabDay === 0) {
@@ -211,7 +212,7 @@ function convertToLongCountStyle(longCount) {
         let haabString = haabDayString + " " + haabMonths[haabMonth];
         return haabString;
     }
-    
+
     function calculateXiuhnelpilli(year) {
         let yearNames = ["Tecpatl (Flint/Kife)", "Calli (House)", "Tochtli (Rabbit)", "Acatl (Reed)"];
 
@@ -233,7 +234,7 @@ function convertToLongCountStyle(longCount) {
                              "Miquiztli (Death)", "Mazatl (Deer)", "Tochtli (Rabbit)", "Atl (Water)", "Itzcuintli (Dog)",
                              "Ozomahtli (Monkey)", "Malinali (Grass)", "Acatl (Reed)", "Ocelotl (Ocelot)", "Cuauhtli (Eagle)",
                              "Cozcacuahtli (Vulture)", "Olin (Movement)", "Tecpatl (Flint Knife)", "Quiyahuitli (Rain)", "Xochitl (Flower)"];
-        
+
         let aztecCount = longCount + 160;
 
         /*if (aztecCount < 0) {
@@ -255,7 +256,7 @@ function convertToLongCountStyle(longCount) {
             aztecMonth = 20;
         }
 
-        
+
         let tonalpohualliString = aztecDay.toString() + " " + aztecDayNames[aztecMonth - 1];
         return tonalpohualliString;
     }
@@ -271,7 +272,7 @@ function convertToLongCountStyle(longCount) {
         let aztecMonth = 0;
 
         aztecRoughDay = (longCount - 223) % 365;
-        
+
 
         if (aztecRoughDay === 0) {
             aztecDay = 5;
@@ -294,7 +295,7 @@ function convertToLongCountStyle(longCount) {
         let xiuhpohualliString = aztecDay.toString() + " " + aztecMonthNames[aztecMonth];
         return xiuhpohualliString;
 
-        
+
 
     }
 
@@ -317,12 +318,12 @@ function convertToLongCountStyle(longCount) {
 
         switch(bars) {
             case 1:
-            context.beginPath();
-                context.rect(0, 36, 100, 20);
-                context.fillStyle = "black";
-                context.fill();
-                break;
-            case 2: 
+              context.beginPath();
+              context.rect(0, 36, 100, 20);
+              context.fillStyle = "black";
+              context.fill();
+              break;
+            case 2:
                 context.beginPath();
                 context.fillRect(0, 58, 100, 20);
                 context.fillStyle = "black";
@@ -333,7 +334,7 @@ function convertToLongCountStyle(longCount) {
                 context.fillStyle = "black";
                 context.fill();
                 break;
-            case 3: 
+            case 3:
                 context.beginPath();
                 context.fillRect(0, 80, 100, 20);
                 context.fillStyle = "black";
@@ -358,7 +359,7 @@ function convertToLongCountStyle(longCount) {
                 context.fillStyle = "black";
                 context.fill();
                 break;
-            case 2: 
+            case 2:
                 context.beginPath();
                 context.arc(37, 17, 11, 0, 2 * Math.PI)
                 context.fillStyle = "black";
@@ -370,7 +371,7 @@ function convertToLongCountStyle(longCount) {
                 context.fill();
 
                 break;
-            case 3: 
+            case 3:
                 context.beginPath();
                 context.arc(25, 17, 11, 0, 2 * Math.PI)
                 context.fillStyle = "black";
@@ -409,7 +410,7 @@ function convertToLongCountStyle(longCount) {
                 context.fill();
                 break;
         }
-    }    
+    }
 }
 
 function makeAztecCalendar() {
@@ -419,13 +420,13 @@ function makeAztecCalendar() {
                              "Cozcacuahtli", "Olin", "Tecpatl", "Quiyahuitli", "Xochitl"];
 
     let longCount = errorCheck();
-    
-    document.getElementById("calendarSpace").innerHTML = "";
-    let calendarSpace = document.getElementById("calendarSpace");
+
+    document.getElementById("calendarBox").innerHTML = "";
+    let calendarBox = document.getElementById("calendarBox");
     let calendarTable = document.createElement("table");
-    
+
     calendarTable.id = "calendarTable";
-    
+
 
     let sacred = crunchSacredDay(longCount);
     console.log(sacred[0]);
@@ -444,7 +445,7 @@ function makeAztecCalendar() {
         calendarTable.appendChild(calendarRow);
     }
 
-    calendarSpace.appendChild(calendarTable);
+    calendarBox.appendChild(calendarTable);
 
     function crunchSacredDay(longCount) {
         let aztecCount = longCount + 160;
@@ -453,7 +454,7 @@ function makeAztecCalendar() {
         if (aztecDay === 0) {
             aztecDay = 13;
         }
-    
+
         let aztecMonth = aztecCount % 20;
         if (aztecMonth === 0) {
             aztecMonth = 20;
