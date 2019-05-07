@@ -7,7 +7,7 @@ After error checking, the first thing it does is calculate the number of days si
 
 Next, the long count is converted into the wacky (it's only wacky at first glance) Mayan number system. The first number can be 0-19, the next is 0-17, the rest are 0-19. In a base-20 system, two digits could represent a value up to 399, with this system two digits can represent up to 359 which closely aproximates the length of the year.
 
-While the digits are being calculated, the numbers are also being drawn within a <canvas> element.
+While the digits are being calculated, the numbers are also being drawn within a \<canvas> element.
   
 After the numbers have been displayed I go on to calculate the day of the sacred and secular calendar year for both the Mayan and Aztec calendars.
 
